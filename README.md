@@ -92,3 +92,43 @@ innesce/
 
 ## _____
 
+Core passes (how it works)
+
+Lexer
+
+Tokenize identifiers, keywords, numbers, string literals, duration suffixes (_ms, _s, etc.).
+
+Normalize durations: produce a TOK_DURATION(value, unit) token.
+
+Parser → AST
+
+Recursive-descent for the subset above.
+
+Keep source spans on every node for diagnostics.
+
+Sema (basic static checks)
+
+Scope tables (capsule → namespace → locals).
+
+Check: redeclaration, unknown symbol, argument count/types, return presence.
+
+Gates: build a set of allowed gates for each capsule; if AST sees a gated API without allowance → error.
+
+Lower “extended conditionals” to explicit branches in the AST (normalize phase).
+
+Codegen → LLVM IR
+
+Map types (truth/enum → i32, duration → i64).
+
+Emit functions, control flow (if/else/match), calls into runtime (in_rt).
+
+Inline asm via llvm::InlineAsm.
+
+Optimize + Emit
+
+Run PassBuilder with O2+Vectorize.
+
+Emit object & link (lld) → .exe. (Dev mode can ORC-JIT to run immediately.)
+
+## _____
+
