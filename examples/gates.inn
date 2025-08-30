@@ -1,0 +1,8 @@
+capsule Gated is
+  gate allow(file);
+
+  fn main() -> i32 is
+    let rc:i32 := fs_write("log.txt", "hi\n");
+    return rc;
+  end
+end
