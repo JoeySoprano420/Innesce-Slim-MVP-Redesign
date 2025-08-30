@@ -1,0 +1,5 @@
+gate allow(file, net);   -- compile-time intent signal
+
+fn write_log(msg:str) -> i32 is
+  return fs_write("log.txt", msg);  -- runtime checks gate bits
+end
