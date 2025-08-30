@@ -1,0 +1,29 @@
+program     := { capsule_decl } ;
+capsule_decl:= "capsule" ident "is" { decl } "end" ;
+decl        := namespace_decl | enum_decl | const_decl | fn_decl | gate_decl | use_decl ;
+
+namespace_decl := "namespace" ident "is" { decl } "end" ;
+enum_decl      := "enum" ident "is" ident { "," ident } "end" ;
+const_decl     := "const" ident ":" type ":=" expr ";" ;
+gate_decl      := "gate" "allow" "(" ident { "," ident } ")" ";" ;
+use_decl       := "use" ident { "::" ident } ";" ;  // future module imports
+
+fn_decl    := "fn" ident "(" [param { "," param }] ")" ["->" type] "is" stmt_list "end" ;
+param      := ident ":" type ;
+type       := "i32"|"i64"|"f32"|"f64"|"bool"|"truth"|"str" | ident ;
+
+stmt_list  := { stmt } ;
+stmt       := var_decl | assign | if_stmt | match_stmt | return_stmt | expr_stmt ;
+var_decl   := "let" ident ":" type ":=" expr ";" ;
+assign     := ident ":=" expr ";" ;
+if_stmt    := "if" expr "then" stmt_list { "elsif" expr "then" stmt_list } ["else" stmt_list] "end" ;
+match_stmt := "match" expr "is" { "case" case_list "=>" stmt_list } ["default" "=>" stmt_list] "end" ;
+case_list  := expr { "," expr } ;
+return_stmt:= "return" [expr] ";" ;
+expr_stmt  := expr ";" ;
+
+expr       := literal | ident | call | paren | binop | asm_expr ;
+call       := ident "(" [expr { "," expr }] ")" ;
+paren      := "(" expr ")" ;
+binop      := expr op expr ;
+asm_expr   := "asm" string_literal ":" ... ; // kept simple in parser
