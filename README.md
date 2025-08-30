@@ -53,3 +53,19 @@ Interop: truth never implicitly converts to bool.
 
 ## _____
 
+Type system (MVP)
+
+Primitives: i32, i64, f32, f64, bool, truth, str.
+
+Durations: sugar → i64 nanoseconds (helpers in runtime lib).
+
+Enums: first-class (lower to i32 in IR).
+
+No implicit casts: i32 → i64 requires cast<i64>(x).
+
+Functions: first-class names; no closures in MVP.
+
+Namespacing: namespace A::B lowers to mangled names _A_B_symbol.
+
+## _____
+
