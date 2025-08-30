@@ -26,3 +26,12 @@ Modules/“capsules”: each capsule = compilation unit → one object file.
 Permissions/Gates: compile-time annotation + tiny runtime that refuses blocked APIs unless the gate is granted.
 
 Packetized execution: an optional runtime loop that calls exported functions per “frame” or “step”.
+
+## _____
+
+Keywords (subset)
+
+capsule, namespace, use, let, const, fn, return, if, elsif, else, match, end, enum, true, false, maybe, gate, asm
+
+## _____
+
