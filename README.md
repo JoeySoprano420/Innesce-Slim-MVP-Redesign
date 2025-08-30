@@ -35,3 +35,21 @@ capsule, namespace, use, let, const, fn, return, if, elsif, else, match, end, en
 
 ## _____
 
+Durations (sugar → i64 nanoseconds)
+
+Literals: 100_ns, 200_us, 300_ms, 4_s, 5_min, 2_h
+
+Lowering: X_ms → duration_ms(X) → i64 (nanoseconds) via helper.
+
+Operators: + - * / on durations produce i64 (or helper functions). MVP keeps it numeric with a type alias.
+
+Extended bools
+
+truth is an enum {True, False, Maybe}.
+
+Sugar: if t? then lowers to if t == Truth.True then.
+
+Interop: truth never implicitly converts to bool.
+
+## _____
+
