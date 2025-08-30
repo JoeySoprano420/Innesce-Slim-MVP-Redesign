@@ -35,6 +35,22 @@ capsule, namespace, use, let, const, fn, return, if, elsif, else, match, end, en
 
 ## _____
 
+Extended conditionals lower to if/else ladders + temporary variables.
+
+Inline assembly is Parsed and emitted to LLVM InlineAsm with target constraints. (Windows vs SysV care noted in docs.)
+
+Gates (permissions) - Compile time: using a gated API without allow(...) → error.
+
+Runtime: capability bitmask enforces at call sites.
+
+Capsules as modules: Each capsule → one object. Link multiple to produce the final exe.
+
+Minimal grammar (EBNF sketch)
+
+(Whitespace/indentation is ignored beyond token separation; “scoped indentation” is a linter warning pass—simple and real.)
+
+## _____
+
 Durations (sugar → i64 nanoseconds)
 
 Literals: 100_ns, 200_us, 300_ms, 4_s, 5_min, 2_h
