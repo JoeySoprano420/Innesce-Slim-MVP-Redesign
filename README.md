@@ -132,3 +132,9 @@ Emit object & link (lld) → .exe. (Dev mode can ORC-JIT to run immediately.)
 
 ## _____
 
+Run with packet loop (CLI sets gate mask & loop):
+
+innescec examples/timer.inn --exe --loop --tick=16ms --gates=file,net
+
+## _____
+
