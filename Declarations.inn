@@ -1,0 +1,13 @@
+capsule Math is
+  namespace core is
+    enum Truth is
+      True, False, Maybe
+    end
+
+    const TICK_MS : i64 := 16_ms;
+
+    fn add(a:i32, b:i32) -> i32 is
+      return a + b;
+    end
+  end
+end
