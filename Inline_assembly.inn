@@ -1,0 +1,4 @@
+fn rdtsc() -> i64 is
+  asm "rdtsc" : "=A"(out) : : : ;
+  return out;
+end
