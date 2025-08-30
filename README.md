@@ -69,3 +69,26 @@ Namespacing: namespace A::B lowers to mangled names _A_B_symbol.
 
 ## _____
 
+Toolchain layout (C++23 + LLVM)
+
+innesce/
+  CMakeLists.txt
+  src/
+    main.cpp                 // CLI: innescec <file.inn> [-c|-S|--exe|--loop]
+    lexer.hpp  lexer.cpp
+    tokens.hpp
+    parser.hpp parser.cpp
+    ast.hpp
+    sema.hpp   sema.cpp      // name + type checks, gate checks
+    codegen.hpp codegen.cpp  // AST → LLVM IR
+    diagnostics.hpp
+    options.hpp
+  rt/
+    in_rt.hpp  in_rt.cpp     // duration helpers, fs/net stubs, gate mask, scheduler
+  examples/
+    hello.inn
+    timer.inn
+    gates.inn
+
+## _____
+
