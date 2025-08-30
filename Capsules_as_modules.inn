@@ -1,0 +1,3 @@
+capsule Util is
+  fn ping() -> i32 is return 1; end
+end
