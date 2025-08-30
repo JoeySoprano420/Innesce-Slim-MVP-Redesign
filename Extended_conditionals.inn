@@ -1,0 +1,13 @@
+if cond then
+  ...
+elsif other then
+  ...
+else
+  ...
+end
+
+match x is
+  case 0       => return 42;
+  case 1, 2    => return 7;
+  default      => return -1;
+end
