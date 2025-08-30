@@ -138,3 +138,77 @@ innescec examples/timer.inn --exe --loop --tick=16ms --gates=file,net
 
 ## _____
 
+CLI behavior (compiler driver)
+
+innescec <file.inn> -c → emit object
+
+innescec <file.inn> --exe → link exe
+
+--emit-ir → print LLVM IR (debug)
+
+--loop --tick=16ms → run packet loop calling step
+
+--gates=file,net → set runtime cap bits
+
+10) Error messages (clear & early)
+
+Unknown symbol: E1001: unknown name 'foo' (line:col); did you mean 'fool'?
+
+Type mismatch: E2003: cannot assign i64 to i32 variable 'x'
+
+Gate violation:
+
+compile time: E3001: 'fs_write' requires gate(file); add 'gate allow(file);' in this capsule
+
+runtime: E3002: file operation denied by runtime policy
+
+11) Roadmap (1–2 week bursts)
+
+V0.1
+
+Lexer (including duration tokens), parser for decls/exprs/if/match
+
+Sema: symbols, types, gate check
+
+Codegen: functions, calls, if/else, match → branches
+
+Runtime: durations, fs_write (gated)
+
+Driver: build object & link exe
+
+V0.2
+
+Namespaces, enums, truth type + sugar (t?)
+
+Inline asm pass-through with target triple options
+
+Optimizer flags (O2/O3) and --emit-ir
+
+V0.3
+
+Packetized loop + step(dt) convention
+
+Basic std capsule (time_now_ns, println if desired)
+
+Windows & Linux CI matrix
+
+12) Notes on inline asm
+
+Use llvm::InlineAsm::get(fnTy, asmStr, constraints, hasSideEffects, isAlignStack, asmDialect).
+
+Provide --target and default to host triple (llvm::sys::getDefaultTargetTriple()).
+
+Document differences (ATT vs Intel, clobbers). Gate behind --allow-asm if you want.
+
+This version of Innesce is intentionally small, 100% real, and buildable today:
+
+A clean C++23 front-end → LLVM IR → native exe.
+
+Ada-flavored sugar that always lowers to regular types/branches.
+
+Real modules (“capsules”), real gates (compile-time + runtime), and optional per-frame scheduling.
+
+LLVM does the heavy lifting on optimization and register allocation.
+
+## _____
+
